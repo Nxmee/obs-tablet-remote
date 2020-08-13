@@ -5,6 +5,7 @@ export default {
 	state: {
 		streaming: false,
 		recording: false,
+		paused: false,
 		bytesPerSec: 0,
 		kbitsPerSec: 0,
 		strain: 0,
@@ -27,6 +28,17 @@ export default {
 			}
 
 			return state.recording
+		},
+		pausedText(state) {
+			if (state.paused === true) {
+				return state.recTimecode
+			}
+
+			if (state.paused === false) {
+				return 'Disabled'
+			}
+
+			return state.paused
 		},
 		streamingText(state) {
 			if (state.streaming === true) {

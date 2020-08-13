@@ -32,6 +32,14 @@ function eventRecordingStopped({commit}) {
 	commit('stream/set/recording', false)
 }
 
+function eventPaused({commit}) {
+	commit('stream/set/paused', true)
+}
+
+function eventResumed({commit}) {
+	commit('stream/set/paused', false)
+}
+
 function eventStreamStarting({commit}) {
 	commit('stream/set/streaming', 'starting')
 }
@@ -60,16 +68,24 @@ async function setRecording({getters: {client}}, {status}) {
 	await client.send({'request-type': request})
 }
 
+async function setPaused({getters: {client}}, {status}) {
+	const request = status ? 'PauseRecording' : 'ResumeRecording'
+
+	await client.send({'request-type': request})
+}
+
 async function streamReload({commit, getters: {client}}) {
 	const {
 		streaming,
 		recording,
+		paused,
 		'stream-timecode': streamTimecode,
 		'rec-timecode': recTimecode
 	} = await client.send({'request-type': 'GetStreamingStatus'})
 
 	commit('stream/set/streaming', streaming)
 	commit('stream/set/recording', recording)
+	commit('stream/set/paused', paused)
 	commit('stream/set/streamTimecode', streamTimecode)
 	commit('stream/set/recTimecode', recTimecode)
 }
@@ -82,6 +98,8 @@ export default {
 	'event/RecordingStarting': eventRecordingStarting,
 	'event/RecordingStopped': eventRecordingStopped,
 	'event/RecordingStopping': eventRecordingStopping,
+	'event/Paused': eventPaused,
+	'event/Resumed': eventResumed,
 	'event/StreamStarted': eventStreamStarted,
 	'event/StreamStarting': eventStreamStarting,
 	'event/StreamStopped': eventStreamStopped,
@@ -89,5 +107,6 @@ export default {
 	'event/StreamStatus': eventStreamStatus,
 	'stream/streaming': setStreaming,
 	'stream/recording': setRecording,
+	'stream/paused': setPaused,
 	'stream/reload': streamReload
 }

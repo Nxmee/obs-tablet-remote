@@ -17,6 +17,13 @@
 		>
 			Recording: {{ recordingText }}
 		</DangerousButton>
+		<DangerousButton
+			:class="[paused ? 'is-active' : 'is-inactive']"
+			:vibrate="true"
+			@click="setPaused({status: !paused})"
+		>
+			Paused: {{ pausedText }}
+		</DangerousButton>
 	</panel-wrapper>
 </template>
 
@@ -34,15 +41,17 @@ export default {
 	computed: {
 		...mapState('obs', {
 			recording: state => state.stream.recording,
+			paused: state => state.stream.paused,
 			recTimecode: state => state.stream.recTimecode,
 			streaming: state => state.stream.streaming,
 			streamTimecode: state => state.stream.streamTimecode
 		}),
-		...mapGetters('obs', ['recordingText', 'streamingText'])
+		...mapGetters('obs', ['recordingText', 'pausedText', 'streamingText'])
 	},
 	methods: {
 		...mapActions('obs', {
 			setRecording: 'stream/recording',
+			pauseRecording: 'stream/paused',
 			setStreaming: 'stream/streaming'
 		})
 	}
