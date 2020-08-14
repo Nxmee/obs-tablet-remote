@@ -7,6 +7,7 @@ const setNumberDroppedFrames = updateStateKey('numDroppedFrames')
 const setNumberTotalFrames = updateStateKey('numTotalFrames')
 const setRecording = updateStateKey('recording')
 const setPaused = updateStateKey('paused')
+const setResumed = updateStateKey('resumed')
 const setRecTimecode = updateStateKey('recTimecode')
 const setStrain = updateStateKey('strain')
 const setStreaming = updateStateKey('streaming')
@@ -17,6 +18,7 @@ function streamReset(state) {
 	setStreaming(state, false)
 	setRecording(state, false)
 	setPaused(state, false)
+	setResumed(state, false)
 	setBytesPerSec(state, 0)
 	setKbitsPerSec(state, 0)
 	setStrain(state, 0)
@@ -30,6 +32,7 @@ function streamStatus(state, status) {
 	setStreaming(state, status.streaming)
 	setRecording(state, status.recording)
 	setPaused(state, status.paused)
+	setResumed(state, status.resumed)
 	setBytesPerSec(state, status['bytes-per-sec'])
 	setKbitsPerSec(state, status['kbits-per-sec'])
 	setStrain(state, status.strain)
@@ -46,6 +49,7 @@ function heartbeat(state, status) {
 	setStreaming(state, status.streaming)
 	setRecording(state, status.recording)
 	setPaused(state, status.paused)
+	setResumed(state, status.resumed)
 	setFps(state, stats.fps)
 	setRecTimecode(state, status['rec-timecode'])
 	setStreamTimecode(state, status['stream-timecode'])
@@ -57,6 +61,7 @@ export default {
 	'stream/heartbeat': heartbeat,
 	'stream/set/recording': setRecording,
 	'stream/set/paused': setPaused,
+	'stream/set/resumed': setResumed,
 	'stream/set/recTimecode': setRecTimecode,
 	'stream/set/streaming': setStreaming,
 	'stream/set/streamTimecode': setStreamTimecode

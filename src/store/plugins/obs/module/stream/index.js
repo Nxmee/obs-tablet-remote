@@ -6,6 +6,7 @@ export default {
 		streaming: false,
 		recording: false,
 		paused: false,
+		resumed: false,
 		bytesPerSec: 0,
 		kbitsPerSec: 0,
 		strain: 0,

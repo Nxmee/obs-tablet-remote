@@ -69,8 +69,12 @@ async function setRecording({getters: {client}}, {status}) {
 }
 
 async function setPaused({getters: {client}}, {status}) {
-	const request = status ? 'PauseRecording' : 'ResumeRecording'
+	const request = status ? 'PauseRecording' : 'PauseRecording'
+	await client.send({'request-type': request})
+}
 
+async function setResumed({getters: {client}}, {status}) {
+	const request = status ? 'ResumeRecording' : 'ResumeRecording'
 	await client.send({'request-type': request})
 }
 
@@ -110,5 +114,6 @@ export default {
 	'stream/streaming': setStreaming,
 	'stream/recording': setRecording,
 	'stream/paused': setPaused,
+	'stream/resumed': setResumed,
 	'stream/reload': streamReload
 }
