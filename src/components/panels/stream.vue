@@ -17,13 +17,13 @@
 		>
 			Recording: {{ recordingText }}
 		</DangerousButton>
-		<DangerousButton
+		<Button
 			:class="[paused ? 'is-active' : 'is-inactive']"
 			:vibrate="true"
 			@click="setPaused({status: !paused})"
 		>
 			Paused: {{ pausedText }}
-		</DangerousButton>
+		</Button>
 	</panel-wrapper>
 </template>
 
