@@ -29,7 +29,7 @@ function streamReset(state) {
 function streamStatus(state, status) {
 	setStreaming(state, status.streaming)
 	setRecording(state, status.recording)
-	setPaused(state, status.recording)
+	setPaused(state, status.paused)
 	setBytesPerSec(state, status['bytes-per-sec'])
 	setKbitsPerSec(state, status['kbits-per-sec'])
 	setStrain(state, status.strain)
@@ -45,7 +45,7 @@ function heartbeat(state, status) {
 	const {stats} = status
 	setStreaming(state, status.streaming)
 	setRecording(state, status.recording)
-	setPaused(state, status.recording)
+	setPaused(state, status.paused)
 	setFps(state, stats.fps)
 	setRecTimecode(state, status['rec-timecode'])
 	setStreamTimecode(state, status['stream-timecode'])

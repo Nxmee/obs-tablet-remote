@@ -31,11 +31,11 @@ export default {
 		},
 		pausedText(state) {
 			if (state.paused === true) {
-				return state.recTimecode
+				return 'Paused'
 			}
 
 			if (state.paused === false) {
-				return 'Disabled'
+				return 'Not Paused'
 			}
 
 			return state.paused

@@ -77,11 +77,13 @@ async function setPaused({getters: {client}}, {status}) {
 async function streamReload({commit, getters: {client}}) {
 	const {
 		streaming,
-		recording,
-		paused,
 		'stream-timecode': streamTimecode,
 		'rec-timecode': recTimecode
 	} = await client.send({'request-type': 'GetStreamingStatus'})
+	const {
+		recording,
+		paused
+	} = await client.send({'request-type': 'GetRecordingStatus'})
 
 	commit('stream/set/streaming', streaming)
 	commit('stream/set/recording', recording)

@@ -51,7 +51,7 @@ export default {
 	methods: {
 		...mapActions('obs', {
 			setRecording: 'stream/recording',
-			pauseRecording: 'stream/paused',
+			setPaused: 'stream/paused',
 			setStreaming: 'stream/streaming'
 		})
 	}
