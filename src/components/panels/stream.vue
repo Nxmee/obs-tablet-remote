@@ -17,20 +17,20 @@
 		>
 			Recording: {{ recordingText }}
 		</DangerousButton>
-		<DangerousButton
+		<SafeButton
 			:class="[paused ? 'is-active' : 'is-inactive']"
 			:vibrate="true"
 			@click="setPaused({status: !paused})"
 		>
 			Pause
-		</DangerousButton>
-		<DangerousButton
+		</SafeButton>
+		<SafeButton
 			:class="[paused ? 'is-active' : 'is-inactive']"
 			:vibrate="true"
 			@click="setResumed({status: !paused})"
 		>
 			Resume
-		</DangerousButton>
+		</SafeButton>
 	</panel-wrapper>
 </template>
 
@@ -38,11 +38,13 @@
 import {mapActions, mapGetters, mapState} from 'vuex'
 
 import DangerousButton from '../dangerous-button'
+import SafeButton from '../safe-button'
 import panelMixin from '@/mixins/panel'
 
 export default {
 	components: {
-		DangerousButton
+		DangerousButton,
+		SafeButton
 	},
 	mixins: [panelMixin],
 	computed: {
